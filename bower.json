@@ -1,0 +1,24 @@
+{
+  "name": "autocomplio",
+  "version": "0.0.0",
+  "homepage": "https://github.com/Jeremboo/autocomplio",
+  "authors": [
+    "Jeremie Boulay <jeremi.boulay@gmail.com>"
+  ],
+  "description": "An autocompleter only with javascript and CSS. No more libraries.",
+  "main": "dist/js/autocomplio.js",
+  "keywords": [
+    "autocomplete",
+    "javascript",
+    "css",
+    "array"
+  ],
+  "license": "GNU",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
