@@ -1,4 +1,4 @@
-autocomplio
+AutoCompltr
 ===========
 
-An autocompleter only with javascript and CSS. No more libraries.
+An personnal autocompleter only with javascript and CSS. No more libraries.

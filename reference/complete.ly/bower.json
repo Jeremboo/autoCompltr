@@ -1,0 +1,16 @@
+{
+  "name": "completely",
+  "version": "1.0.1",
+  "main": "js/complete.ly.1.0.1.js",
+  "description": "A javascript library for autocompletion",
+  "keywords": [
+    "autocomplete",
+    "javascript",
+    "input"
+  ],
+  "authors": [
+    "Lorenzo Puccetti"
+  ],
+  "license": "MIT",
+  "homepage": "http://complete-ly.appspot.com/"
+}

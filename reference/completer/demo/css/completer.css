@@ -1,0 +1,89 @@
+/* Module code */
+.form--lightsearch {
+    margin: 0;
+    padding: 0;
+    
+}
+
+.input--search,
+.item--result {
+    font-family: Tahoma, sans-serif;
+    font-size: 100%;
+}
+
+.input--search {
+    display: block;
+    float: left;
+    width: 200px;
+    height: 30px;
+    font-size: 1em;
+    line-height: 30px;
+    color: #333;
+    padding: 1px 3px;
+    border-top: 1px solid #dfdfdf;
+    border-bottom: 1px solid #dfdfdf;
+    border-left: 1px solid #dfdfdf;
+    border-right: none;  
+    background: #fff;
+    margin: 0 !important;
+    margin: 0 -3px 0 0; /* IE<=6 Bugfix */   
+}
+
+.button--search {
+    display: block;
+    width: 32px;
+    height: 34px;
+    background: #f2f2f2 url('../img/search.png') no-repeat center;
+    border: 1px solid #dfdfdf;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    margin: 0; 
+}
+
+.button--search:hover {
+    cursor: pointer;
+}
+
+.form--lightsearch__result {
+    clear: both;
+    position: absolute;  
+    margin: 0;
+}
+
+.item--result {
+    width: 194px;
+    background: #fff;
+    border-bottom: 1px dashed #dfdfdf;;
+    border-left: 1px solid #dfdfdf;;
+    border-right: 1px solid #dfdfdf;
+    padding: 5px 5px;
+    color: #333;
+}
+.item--result.last,
+.item--result:last-child {
+    border-bottom: 1px solid #dfdfdf;
+}
+.item--result:hover,
+.item--result.focus {
+    cursor: pointer;
+    color: #fff;
+    background: #637c8e;
+    transition: all 0.2s ease-in-out;
+}
+.item--result .data-0 {
+    float: left;
+    margin: 0 0 3px 0;
+}
+.item--result .data-1 {
+    display: block;
+    float: right;
+    color: #c0c0c0;
+    font-weight: normal;
+}
+.item--result .data-2 {
+    clear: both;
+    display: block;
+    color: #c0c0c0;
+    font-weight: normal;
+}
+

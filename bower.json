@@ -1,12 +1,12 @@
 {
-  "name": "autocomplio",
+  "name": "AutoCompltr",
   "version": "0.0.0",
-  "homepage": "https://github.com/Jeremboo/autocomplio",
+  "homepage": "https://github.com/Jeremboo/AutoCompltr",
   "authors": [
     "Jeremie Boulay <jeremi.boulay@gmail.com>"
   ],
   "description": "An autocompleter only with javascript and CSS. No more libraries.",
-  "main": "dist/js/autocomplio.js",
+  "main": "dist/js/AutoCompltr.js",
   "keywords": [
     "autocomplete",
     "javascript",
