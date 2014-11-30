@@ -5,7 +5,7 @@
   "authors": [
     "Jérémie Boulay <jeremi.boulay@gmail.com>"
   ],
-  "description": "An autocompleter only with javascript and CSS. No more libraries.",
+  "description": "An personnal library for autocompletion. It has no dependencies and works only with javascript and CSS.",
   "main": "dist/js/autoCompltr.js",
   "keywords": [
     "autocomplete",
