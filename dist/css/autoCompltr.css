@@ -1,0 +1,56 @@
+/**
+ * autoCompltr 1.0.0
+ * GNU Licensing
+ * Copyright (c) 2014 Jérémie Boulay <jeremi.boulay@gmail.com>
+ * URL : https://github.com/Jeremboo/AutoCompltr
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the Creative Commons Licence.
+ *
+ */
+
+.AutoCompltr {
+	position: relative;
+	min-width: 10px;
+	min-height: 25px;
+	font-family: Helvetica,Arial,sans-serif;
+}
+
+.AutoCompltr-input {
+	background-color: transparent;
+	position: absolute;
+	width: 98%;
+	left: 1%;
+	height: 100%;
+	border: 0;
+	padding: 0;
+	font-size: 100%;
+}
+
+.AutoCompltr-input:focus{
+	outline: 0;
+}
+
+.AutoCompltr-suggestionList{
+	position: absolute;
+	width: 98%;
+	top: 100%;
+	padding: 0;
+	margin: 0.5% 1%;
+	list-style: none;
+}
+
+.AutoCompltr-suggestion{
+	cursor: pointer;
+	background-color: #fff;
+	padding: 5px;
+	transition: all 0.2s ease-in-out;
+}
+
+.AutoCompltr-suggestionList .focus {
+	background-color: #D0D1D3;
+}
+
+.AutoCompltr-suggestion:hover{
+	background-color: #D0D1D3;
+}

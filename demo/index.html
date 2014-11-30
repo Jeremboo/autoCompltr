@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Example for use autoCompltr</title>
+	<link rel="stylesheet" href="../dist/css/autoCompltr.css">
+	<style>
+
+		html, body{
+			height: 100%;
+			overflow: hidden;
+			background-color: #EB2929;
+		}
+
+		h1{
+			margin-top: 40px;
+			text-align: center;
+		}
+
+		#auto-complete{
+			width: 40%;
+			min-width: 100px; 
+			margin-top: 20px;
+			margin : auto;
+			background-color: #FBEDCE;
+		}
+
+		#valid{
+			width: 100px;
+			margin: 20px auto;
+			border-radius: 3px;
+			display: block;
+		}
+
+
+	</style>
+</head>
+<body>
+
+	<h1>Test autocompletion with autoCompltr.js</h1>
+
+	<div id="auto-complete"></div>
+	<button id="valid">I choose...</button>
+
+	<script src="../dist/js/autoCompltr.js"></script>
+	<script>
+
+		var autoCompltrDOM = document.getElementById('auto-complete');
+
+		var list = [
+			'chateau',
+			'livre',
+			'maison',
+			'voiture',
+			'cheval',
+			'route'
+		];
+
+		var autoCompltr = new AutoCompltr(autoCompltrDOM);
+		autoCompltr.setSuggestionsList(list);
+
+		document.getElementById('valid').addEventListener('click',function(e){
+			var v = autoCompltr.getValue();
+			alert(v);
+		});
+
+	</script>
+</body>
+</html>

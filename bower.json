@@ -1,12 +1,12 @@
 {
   "name": "AutoCompltr",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "homepage": "https://github.com/Jeremboo/AutoCompltr",
   "authors": [
-    "Jeremie Boulay <jeremi.boulay@gmail.com>"
+    "Jérémie Boulay <jeremi.boulay@gmail.com>"
   ],
   "description": "An autocompleter only with javascript and CSS. No more libraries.",
-  "main": "dist/js/AutoCompltr.js",
+  "main": "dist/js/autoCompltr.js",
   "keywords": [
     "autocomplete",
     "javascript",
@@ -16,9 +16,5 @@
   "license": "GNU",
   "ignore": [
     "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
   ]
 }
