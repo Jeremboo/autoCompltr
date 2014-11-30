@@ -1,8 +1,8 @@
 /**
  * autoCompltr 1.0.0
- * GNU Licensing
+ * Apache 2.0 Licensing
  * Copyright (c) 2014 Jérémie Boulay <jeremi.boulay@gmail.com>
- * URL : https://github.com/Jeremboo/AutoCompltr
+ * URL : https://github.com/Jeremboo/autoCompltr
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the Creative Commons Licence.

@@ -1,7 +1,7 @@
 {
   "name": "AutoCompltr",
   "version": "1.0.0",
-  "homepage": "https://github.com/Jeremboo/AutoCompltr",
+  "homepage": "https://github.com/Jeremboo/autoCompltr",
   "authors": [
     "Jérémie Boulay <jeremi.boulay@gmail.com>"
   ],
@@ -13,8 +13,8 @@
     "css",
     "array"
   ],
-  "license": "GNU",
+  "license": "Apache 2.0",
   "ignore": [
-    "**/.*",
+    "**/.*"
   ]
 }

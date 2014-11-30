@@ -3,16 +3,19 @@ AutoCompltr
 
 An personnal library for autocompletion. It has no dependencies and works only with javascript and CSS.
 
-I wanted have a simple and independent system. I helped myself two other works :
-
-- [complete.ly](http://complete-ly.appspot.com/) by Lorenzo Puccetti
-- [completer](http://demos.e-lless.be/completer/) by Lebleu Steve
+Show the demo at : [jeremieboulay.fr/projets/LIBS/autoCompltr/demo/](http://jeremieboulay.fr/projets/LIBS/autoCompltr/demo/)
 
 ## How to install
 
 You can use bower : ``bower install autCompltr``
 
 You can also use gitHub : ``git clone https://github.com/Jeremboo/AutoCompltr``
+
+Then, add in your HTML page :
+
+A CSS link : ``<link rel="stylesheet" href="bower_components/autoCompltr/dist/css/autoCompltr.css">``
+
+A javascript link : ``<script src="bower_components/autoCompltr/dist/js/autoCompltr.js"></script>``
 
 ## Getting started
 
@@ -33,3 +36,13 @@ The array of suggetions of second parameter is not required for the begining. Bu
 If you want get value in javascript for other reason, you can use ``getValue()`` method :
 
 		completer.getValue();
+
+
+## ABOUT 
+
+
+I wanted have a simple and independent system. I helped myself two other works :
+
+- [complete.ly](http://complete-ly.appspot.com/) by Lorenzo Puccetti
+- [completer](http://demos.e-lless.be/completer/) by Lebleu Steve
+
