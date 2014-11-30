@@ -9,12 +9,51 @@
 		html, body{
 			height: 100%;
 			overflow: hidden;
-			background-color: #EB2929;
+			font-family: Helvetica, Arial, sans-serif;
+			color: #32292F;
+			background-color: #FBFBF2;
+			margin: 0;
+			padding: 0;
+		}
+		h1, h2{
+			text-align: center;
+		}
+		a, a:focus {
+			color: #FBFBF2;
+		}
+		header {
+			padding-top : 20px;
+			background-color: #629385;
+			padding: 20px;
+		}
+		header p {
+			text-align: center;
+			margin-bottom: 2px;
+		}
+		section{
+			width: 80%;
+			max-width: 1000px;
+			margin: auto;
+			margin-top: 20px;
 		}
 
-		h1{
-			margin-top: 40px;
-			text-align: center;
+		section a {
+			font-weight: bold;
+			color: #629385;
+		}
+
+		button {
+			border-radius: 3px;
+			cursor: pointer;
+			border: 0;
+			background-color: #DDD78D;
+			padding: 5px 7px;
+		}
+		button a{
+			width: 100%;
+			height: 100%;
+			text-decoration: none;
+			color: #32292F;
 		}
 
 		#auto-complete{
@@ -22,44 +61,103 @@
 			min-width: 100px; 
 			margin-top: 20px;
 			margin : auto;
-			background-color: #FBEDCE;
+			background-color:#FBFBF2;
 		}
-
-		#valid{
+		#show-surname{
 			width: 100px;
 			margin: 20px auto;
-			border-radius: 3px;
 			display: block;
 		}
-
-
+		.content p, .content button{
+			display: inline-block;
+			vertical-align: top;
+		}
+		.content p {
+			width: 80%;
+		}
+		.content button{
+			width: 17%;
+			height: 50px;
+		}
+		pre.prettyprint{
+			border: 0 !important;
+		}
 	</style>
 </head>
 <body>
 
-	<h1>Test autocompletion with autoCompltr.js</h1>
+	<header>
+		<h1>Demo of auto-completion system with <a href="https://github.com/Jeremboo/autoCompltr">autoCompltr.js</a></h1>
+		<p>Choose a Surname <small>(ex : Rose)</small></p>
+		<div id="auto-complete"></div>
+		<button id="show-surname">I choose...</button>
+	</header>
+	<section>
+		<div class="content">
+			<p><a class="btn" href="https://github.com/Jeremboo/autoCompltr">AutoCompltr.js</a> is a simple, basic and fast system of auto-completion. <a href="jeremieboulay.fr">I</a> wanted to have a system of auto-completion without deppendencies and quickly usable.</p>
+				
+			<button><a class="btn" href="https://github.com/Jeremboo/autoCompltr">Download</a></button>
+		</div>
+		<h2>Script Written</h2>
+		<pre class="prettyprint">
+			var autoCompltrDOM = document.getElementById('auto-complete');
+			var list = ["Hewitt","Carter","Murray","Bartlett","Howard","Lancaster","Steele","..."];
 
-	<div id="auto-complete"></div>
-	<button id="valid">I choose...</button>
+			var autoCompltr = new AutoCompltr(autoCompltrDOM, list);
 
+			document.getElementById('show-surname').addEventListener('click',function(e){
+				var v = autoCompltr.getValue();
+				alert(v);
+			});
+
+		</pre>
+	</section>
+
+	<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
 	<script src="../dist/js/autoCompltr.js"></script>
 	<script>
 
 		var autoCompltrDOM = document.getElementById('auto-complete');
 
 		var list = [
-			'chateau',
-			'livre',
-			'maison',
-			'voiture',
-			'cheval',
-			'route'
+		  "Hewitt",
+		  "Carter",
+		  "Murray",
+		  "Golden",
+		  "Fowler",
+		  "Riggs",
+		  "Bowers",
+		  "Bartlett",
+		  "Howard",
+		  "Lancaster",
+		  "Steele",
+		  "Kaufman",
+		  "Reed",
+		  "Schwartz",
+		  "Rose",
+		  "Sullivan",
+		  "Payne",
+		  "Ewing",
+		  "Nicholson",
+		  "Mathis",
+		  "Reid",
+		  "Velez",
+		  "Rasmussen",
+		  "Avila",
+		  "Ayers",
+		  "Lowe",
+		  "Cobb",
+		  "Noble",
+		  "Woodard",
+		  "Jarvis",
+		  "Dyer",
+		  "Little"
 		];
 
 		var autoCompltr = new AutoCompltr(autoCompltrDOM);
 		autoCompltr.setSuggestionsList(list);
 
-		document.getElementById('valid').addEventListener('click',function(e){
+		document.getElementById('show-surname').addEventListener('click',function(e){
 			var v = autoCompltr.getValue();
 			alert(v);
 		});

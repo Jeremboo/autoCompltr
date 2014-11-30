@@ -1,5 +1,5 @@
 /**
- * autoCompltr 1.0.0
+ * autoCompltr 1.0.2
  * Apache 2.0 Licensing
  * Copyright (c) 2014 Jérémie Boulay <jeremi.boulay@gmail.com>
  * URL : https://github.com/Jeremboo/autoCompltr
@@ -84,14 +84,18 @@ AutoCompltr.prototype.displaySuggestions = function(showAll){
     this.pointer = -1;
     
     var suggs = "";
-    var inputText = this.HTMLInput.value;
+    var inputText = this.HTMLInput.value.toLowerCase();
 
     for(var i = 0; i < this.suggestionsList.length ; i++) {
-        if(this.suggestionsList[i].indexOf(inputText) >= 0 || showAll === true){
-            suggs += this.insertSuggestion(i);
+        if(this.suggestionsList[i].toLowerCase().indexOf(inputText) >= 0 || showAll === true){
+            if(this.suggestionsList[i].toLowerCase().indexOf(inputText) === 0){
+                suggs = this.insertSuggestion(i)+suggs;
+            } else {
+                suggs += this.insertSuggestion(i);
+            }
         }
     }
-           
+
     this.HTMLSuggestionsList.innerHTML = suggs;
     this.clickableSuggestion('AutoCompltr-suggestion');
 };
