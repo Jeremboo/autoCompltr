@@ -7,9 +7,9 @@ Show the demo at : [jeremieboulay.fr/projets/LIBS/autoCompltr/demo/](http://jere
 
 ## How to install
 
-You can use bower : ``bower install autCompltr``
+You can use bower : ``bower install auto-compltr``
 
-You can also use gitHub : ``git clone https://github.com/Jeremboo/AutoCompltr``
+You can also use gitHub : ``git clone https://github.com/Jeremboo/autoCompltr``
 
 Then, add in your HTML page :
 
