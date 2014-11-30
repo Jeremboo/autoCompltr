@@ -6,7 +6,10 @@
     "Jérémie Boulay <jeremi.boulay@gmail.com>"
   ],
   "description": "An personnal library for autocompletion. It has no dependencies and works only with javascript and CSS.",
-  "main": "dist/js/autoCompltr.js",
+  "main": [
+    "dist/js/autoCompltr.js",
+    "dist/css/autoCompltr.css"
+  ],
   "keywords": [
     "autocomplete",
     "javascript",
