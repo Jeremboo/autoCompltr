@@ -1,5 +1,5 @@
 /**
- * autoCompltr 1.0.2
+ * autoCompltr 1.1.0
  * Apache 2.0 Licensing
  * Copyright (c) 2014 Jérémie Boulay <jeremi.boulay@gmail.com>
  * URL : https://github.com/Jeremboo/autoCompltr
@@ -23,6 +23,8 @@ function AutoCompltr(wrapper, datas){
     this.focused = null;
     this.HTMLSuggestionsList = document.createElement('ul');
     this.HTMLInput = document.createElement('input');
+
+    this.onEnterEvent = null;
 
     if(datas)
         this.setSuggestionsList(datas);
@@ -61,14 +63,15 @@ AutoCompltr.prototype.keyboardEvent = function(){
         } else if (keycode === 13) {
             if(that.focused)
                 that.setInputByFocus();
+            if(that.onEnterEvent)
+                that.onEnterEvent(e);
         } else {
             if(that.HTMLInput.value !== "") {
                 that.displaySuggestions(false);
             } else {
                 //that.hideSuggestionsList();
                 that.displaySuggestions(true);
-            }
-            
+            }         
         }
     });
 };
@@ -199,3 +202,21 @@ AutoCompltr.prototype.hideSuggestionsList = function(){
 AutoCompltr.prototype.getValue = function(){
     return this.HTMLInput.value;
 };
+
+/* ##########
+   ADDITIONNAL ACTION FOR EVENT
+   ########## */
+
+AutoCompltr.prototype.onEnter = function(callback,once){
+    once = false || once;
+    this.onEnterEvent = function(e){
+        this.hideSuggestionsList();
+        callback(e);
+        if(once)
+            this.removeOnEnter();
+    }
+}
+
+AutoCompltr.prototype.removeOnEnter = function(){
+    this.onEnterEvent = null;
+}

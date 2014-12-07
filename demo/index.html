@@ -7,8 +7,6 @@
 	<style>
 
 		html, body{
-			height: 100%;
-			overflow: hidden;
 			font-family: Helvetica, Arial, sans-serif;
 			color: #32292F;
 			background-color: #FBFBF2;
@@ -82,6 +80,13 @@
 		pre.prettyprint{
 			border: 0 !important;
 		}
+
+		.fidelisation{
+			font-size: 0.8em;
+			position: fixed;
+			top: 5px;
+			right: 10px;
+		}	
 	</style>
 </head>
 <body>
@@ -91,6 +96,8 @@
 		<p>Choose a Surname <small>(ex : Rose)</small></p>
 		<div id="auto-complete"></div>
 		<button id="show-surname">I choose...</button>
+
+		<p class="fidelisation">Projet réalisé par <a href="http://www.jeremieboulay.fr">Jérémie Boulay</a></p>
 	</header>
 	<section>
 		<div class="content">
@@ -105,9 +112,12 @@
 
 			var autoCompltr = new AutoCompltr(autoCompltrDOM, list);
 
-			document.getElementById('show-surname').addEventListener('click',function(e){
-				var v = autoCompltr.getValue();
-				alert(v);
+			autoCompltr.onEnter(function(e){
+				alert("You choose : "+autoCompltr.getValue()+" with the enter key");
+			},false);
+
+			document.getElementById('show-surname').addEventListener('click', function(e){
+				alert("You choose : "+autoCompltr.getValue());
 			});
 
 		</pre>
@@ -156,10 +166,12 @@
 
 		var autoCompltr = new AutoCompltr(autoCompltrDOM);
 		autoCompltr.setSuggestionsList(list);
+		autoCompltr.onEnter(function(e){
+			alert("You choose : "+autoCompltr.getValue()+" with the enter key");
+		},false);
 
-		document.getElementById('show-surname').addEventListener('click',function(e){
-			var v = autoCompltr.getValue();
-			alert(v);
+		document.getElementById('show-surname').addEventListener('click', function(e){
+			alert("You choose : "+autoCompltr.getValue());
 		});
 
 	</script>

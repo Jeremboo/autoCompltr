@@ -33,9 +33,19 @@ The array of suggetions of second parameter is not required for the begining. Bu
 
 		completer.setSuggestionsList(['sugg1','sugg2','...']);
 
-If you want get value in javascript for other reason, you can use ``getValue()`` method :
+## OTHER METHODS
+
+- If you want get value in javascript for other reason, you can use ``getValue()`` method :
 
 		completer.getValue();
+
+- If you want added actions when enter is pressed, use ``onEnter()`` :
+
+        completer.onEnter(funcion(){
+            ...
+        },false);
+
+    The second parameter is used when you want execuded this method only once. ``true`` for only once, ``false`` for the times (by default).
 
 
 ## ABOUT 
