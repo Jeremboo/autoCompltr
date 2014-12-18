@@ -33,7 +33,7 @@ The array of suggetions of second parameter is not required for the begining. Bu
 
 		completer.setSuggestionsList(['sugg1','sugg2','...']);
 
-## OTHER METHODS
+## Other methods
 
 - If you want get value in javascript for other reason, you can use ``getValue()`` method :
 

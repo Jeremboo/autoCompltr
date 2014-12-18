@@ -1,5 +1,5 @@
 /**
- * autoCompltr 1.1.0
+ * autoCompltr 1.1.1
  * Apache 2.0 Licensing
  * Copyright (c) 2014 Jérémie Boulay <jeremi.boulay@gmail.com>
  * URL : https://github.com/Jeremboo/autoCompltr
@@ -201,6 +201,10 @@ AutoCompltr.prototype.hideSuggestionsList = function(){
 
 AutoCompltr.prototype.getValue = function(){
     return this.HTMLInput.value;
+};
+
+AutoCompltr.prototype.placeholder = function(placeholder){
+    this.HTMLInput.placeholder = placeholder;
 };
 
 /* ##########
