@@ -32,21 +32,21 @@ For use this libs, you must have two things :
 In your JS script, select your empty ``<div>`` and create a new AutoCompltr object.
 
 		var wrapper = document.getElementById('my-div');
-		var completer = new AutoCompltr(wrapper,tblSugg);
+		var compltr = new AutoCompltr(wrapper,tblSugg);
 
 The array of suggetions of second parameter is not required for the begining. But your auto completion will not work if you have not indicate your suggestions list. So if you do not provide the second parameter the first time, you must be call ``setSuggestionsList`` method :
 
-		completer.setSuggestionsList(['sugg1','sugg2','...']);
+		compltr.setSuggestionsList(['sugg1','sugg2','...']);
 
 ## Other methods
 
 - If you want get value in javascript for other reason, you can use ``getValue()`` method :
 
-		completer.getValue();
+		compltr.getValue();
 
 - If you want added actions when enter is pressed, use ``onEnter()`` :
 
-        completer.onEnter(funcion(){
+        compltr.onEnter(funcion(){
             ...
         },false);
 
