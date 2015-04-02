@@ -1,5 +1,5 @@
 /**
- * autoCompltr 1.1.2
+ * autoCompltr 1.1.3
  * Apache 2.0 Licensing
  * Copyright (c) 2014 Jérémie Boulay <jeremi.boulay@gmail.com>
  * URL : https://github.com/Jeremboo/autoCompltr
@@ -17,6 +17,11 @@
 function AutoCompltr(wrapper, datas) {
     'use strict';
 
+    this.CLASSNAME_AUTO_COMPLTR = "AutoCompltr";
+    this.CLASSNAME_AUTO_COMPLTR_SUGGESTION_LIST = "AutoCompltr-suggestionList";
+    this.CLASSNAME_AUTO_COMPLTR_SUGGESTION = "AutoCompltr-suggestion";
+    this.CLASSNAME_AUTO_COMPLTR_INPUT = "AutoCompltr-input";
+
     this.HTMLWrapper = wrapper;
     this.suggestionsList = [];
     this.suggestionsFind = [];
@@ -30,16 +35,17 @@ function AutoCompltr(wrapper, datas) {
     if (datas) {
         this.setSuggestionsList(datas);
     }
+
     this.init();
 }
 
 AutoCompltr.prototype.init = function () {
     'use strict';
 
-    this.HTMLWrapper.className += " AutoCompltr";
-    this.HTMLSuggestionsList.className = "AutoCompltr-suggestionList";
+    this.HTMLWrapper.classList.add(this.CLASSNAME_AUTO_COMPLTR);
+    this.HTMLSuggestionsList.className = this.CLASSNAME_AUTO_COMPLTR_SUGGESTION_LIST;
+    this.HTMLInput.className = this.CLASSNAME_AUTO_COMPLTR_INPUT;
     this.HTMLInput.type = "text";
-    this.HTMLInput.className = "AutoCompltr-input";
     this.HTMLWrapper.appendChild(this.HTMLInput);
     this.HTMLWrapper.appendChild(this.HTMLSuggestionsList);
 
@@ -74,7 +80,6 @@ AutoCompltr.prototype.keyboardEvent = function () {
             if (that.HTMLInput.value !== "") {
                 that.displaySuggestions(false);
             } else {
-                //that.hideSuggestionsList();
                 that.displaySuggestions(true);
             }
         }
@@ -107,16 +112,14 @@ AutoCompltr.prototype.displaySuggestions = function (showAll) {
     }
 
     this.HTMLSuggestionsList.innerHTML = suggs;
-    this.clickableSuggestion('AutoCompltr-suggestion');
+    this.clickableSuggestion();
 };
 
 AutoCompltr.prototype.insertSuggestion = function (i) {
     'use strict';
 
-    var sugg = '<li id="' + i + '" class="AutoCompltr-suggestion">';
-    sugg += this.suggestionsList[i]; // can be modified
-    sugg += '</li>';
-    return sugg;
+    return '<li id="' + i + '" class="' + this.CLASSNAME_AUTO_COMPLTR_SUGGESTION + '">' +
+        this.suggestionsList[i] + '</li>';
 };
 
 
@@ -124,26 +127,29 @@ AutoCompltr.prototype.insertSuggestion = function (i) {
    SELECT SUGGESTIONS 
    ########## */
 
-AutoCompltr.prototype.clickableSuggestion = function (className) {
+AutoCompltr.prototype.clickableSuggestion = function () {
     'use strict';
 
-    var that = this,
-        numberOfSuggestions = 0,
+    this.suggestionsFind = document.getElementsByClassName(this.CLASSNAME_AUTO_COMPLTR_SUGGESTION);
+
+    var numberOfSuggestions = this.suggestionsFind.length,
         i = 0;
 
-    this.suggestionsFind = document.getElementsByClassName(className);
-
-    if (typeof this.suggestionsFind !== 'undefined') {
-        numberOfSuggestions = this.suggestionsFind.length;
-
-        if (numberOfSuggestions !== 0 && numberOfSuggestions !== null) {
-            for (i = 0; i < numberOfSuggestions; i += 1) {
-                this.suggestionsFind[i].addEventListener('click', function (e) {
-                    that.HTMLInput.value = e.srcElement.innerHTML;
-                });
-            }
+    if (numberOfSuggestions) {
+        for (i; i < numberOfSuggestions; i += 1) {
+            this.onClickAtSuggestion(this.suggestionsFind[i]);
         }
     }
+};
+
+AutoCompltr.prototype.onClickAtSuggestion = function (suggestion) {
+    'use strict';
+
+    var that = this;
+
+    suggestion.addEventListener('click', function (e) {
+        that.HTMLInput.value = e.srcElement.innerHTML;
+    });
 };
 
 AutoCompltr.prototype.navigation = function (keycode) {
@@ -192,8 +198,8 @@ AutoCompltr.prototype.setFocus = function () {
 AutoCompltr.prototype.removeFocus = function () {
     'use strict';
 
-     this.focused = null;
-     this.suggestionsFind[this.pointer].className += 'AutoCompltr-suggestion';
+    this.focused = null;
+    this.suggestionsFind[this.pointer].className += this.CLASSNAME_AUTO_COMPLTR_SUGGESTION;
 };
 
 AutoCompltr.prototype.setInputByFocus = function () {
@@ -244,7 +250,7 @@ AutoCompltr.prototype.placeholder = function (placeholder) {
 AutoCompltr.prototype.onEnter = function (callback, once) {
     'use strict';
 
-    once = false || once;
+    once = once || false;
     this.onEnterEvent = function (e) {
 
         this.hideSuggestionsList();
