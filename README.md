@@ -35,7 +35,7 @@ The array of suggetions of second parameter is not required for the begining. Bu
 
 ## Other methods
 
-- If you want get value in javascript for other reason, you can use ``getValue()`` method :
+- If you want get value, you can use ``getValue()`` method :
 
 		completer.getValue();
 
@@ -46,6 +46,10 @@ The array of suggetions of second parameter is not required for the begining. Bu
         },false);
 
     The second parameter is used when you want execuded this method only once. ``true`` for only once, ``false`` for the times (by default).
+
+- If you want placeholder, use ``placeholder(name)`` :
+
+        completer.onEnter("Your pseudo");
 
 
 ## ABOUT 
