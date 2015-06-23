@@ -1,5 +1,5 @@
 /**
- * autoCompltr 1.1.1
+ * autoCompltr 1.1.3
  * Apache 2.0 Licensing
  * Copyright (c) 2014 Jérémie Boulay <jeremi.boulay@gmail.com>
  * URL : https://github.com/Jeremboo/autoCompltr
@@ -14,7 +14,13 @@
    INIT 
    ########## */
 
-function AutoCompltr(wrapper, datas){
+function AutoCompltr(wrapper, datas) {
+    'use strict';
+
+    this.CLASSNAME_AUTO_COMPLTR = "AutoCompltr";
+    this.CLASSNAME_AUTO_COMPLTR_SUGGESTION_LIST = "AutoCompltr-suggestionList";
+    this.CLASSNAME_AUTO_COMPLTR_SUGGESTION = "AutoCompltr-suggestion";
+    this.CLASSNAME_AUTO_COMPLTR_INPUT = "AutoCompltr-input";
 
     this.HTMLWrapper = wrapper;
     this.suggestionsList = [];
@@ -26,52 +32,56 @@ function AutoCompltr(wrapper, datas){
 
     this.onEnterEvent = null;
 
-    if(datas)
+    if (datas) {
         this.setSuggestionsList(datas);
+    }
+
     this.init();
 }
 
-AutoCompltr.prototype.init = function(){
+AutoCompltr.prototype.init = function () {
+    'use strict';
 
-    this.HTMLWrapper.className += " AutoCompltr";
-    this.HTMLSuggestionsList.className = "AutoCompltr-suggestionList";
+    this.HTMLWrapper.classList.add(this.CLASSNAME_AUTO_COMPLTR);
+    this.HTMLSuggestionsList.className = this.CLASSNAME_AUTO_COMPLTR_SUGGESTION_LIST;
+    this.HTMLInput.className = this.CLASSNAME_AUTO_COMPLTR_INPUT;
     this.HTMLInput.type = "text";
-    this.HTMLInput.className = "AutoCompltr-input";
     this.HTMLWrapper.appendChild(this.HTMLInput);
     this.HTMLWrapper.appendChild(this.HTMLSuggestionsList);
 
     var that = this;
 
     this.keyboardEvent();
-    document.body.addEventListener('click',function(){
+    document.body.addEventListener('click', function () {
         that.hideSuggestionsList();
     });
 };
 
-AutoCompltr.prototype.keyboardEvent = function(){
+AutoCompltr.prototype.keyboardEvent = function () {
+    'use strict';
 
     var that = this;
 
-    this.HTMLInput.addEventListener('keyup',function(e){
-
+    this.HTMLInput.addEventListener('keyup', function (e) {
         e = e || window.event;
-        
+
         var keycode = e.keyCode;
 
-        if(keycode === 38 || keycode === 40){
+        if (keycode === 38 || keycode === 40) {
             that.navigation(keycode);
         } else if (keycode === 13) {
-            if(that.focused)
+            if (that.focused) {
                 that.setInputByFocus();
-            if(that.onEnterEvent)
+            }
+            if (that.onEnterEvent) {
                 that.onEnterEvent(e);
+            }
         } else {
-            if(that.HTMLInput.value !== "") {
+            if (that.HTMLInput.value !== "") {
                 that.displaySuggestions(false);
             } else {
-                //that.hideSuggestionsList();
                 that.displaySuggestions(true);
-            }         
+            }
         }
     });
 };
@@ -81,18 +91,20 @@ AutoCompltr.prototype.keyboardEvent = function(){
    FIND SUGGESTIONS 
    ########## */
 
-AutoCompltr.prototype.displaySuggestions = function(showAll){
+AutoCompltr.prototype.displaySuggestions = function (showAll) {
+    'use strict';
 
     this.HTMLSuggestionsList.style.display = 'block';
     this.pointer = -1;
-    
-    var suggs = "";
-    var inputText = this.HTMLInput.value.toLowerCase();
 
-    for(var i = 0; i < this.suggestionsList.length ; i++) {
-        if(this.suggestionsList[i].toLowerCase().indexOf(inputText) >= 0 || showAll === true){
-            if(this.suggestionsList[i].toLowerCase().indexOf(inputText) === 0){
-                suggs = this.insertSuggestion(i)+suggs;
+    var suggs = "",
+        i = 0,
+        inputText = this.HTMLInput.value.toLowerCase();
+
+    for (i = 0; i < this.suggestionsList.length; i += 1) {
+        if (this.suggestionsList[i].toLowerCase().indexOf(inputText) >= 0 || showAll === true) {
+            if (this.suggestionsList[i].toLowerCase().indexOf(inputText) === 0) {
+                suggs = this.insertSuggestion(i) + suggs;
             } else {
                 suggs += this.insertSuggestion(i);
             }
@@ -100,14 +112,14 @@ AutoCompltr.prototype.displaySuggestions = function(showAll){
     }
 
     this.HTMLSuggestionsList.innerHTML = suggs;
-    this.clickableSuggestion('AutoCompltr-suggestion');
+    this.clickableSuggestion();
 };
 
-AutoCompltr.prototype.insertSuggestion = function(i){
-    var sugg = '<li id="'+i+'" class="AutoCompltr-suggestion">';
-    sugg += this.suggestionsList[i]; // can be modified
-    sugg += '</li>';
-    return sugg;
+AutoCompltr.prototype.insertSuggestion = function (i) {
+    'use strict';
+
+    return '<li id="' + i + '" class="' + this.CLASSNAME_AUTO_COMPLTR_SUGGESTION + '">' +
+        this.suggestionsList[i] + '</li>';
 };
 
 
@@ -115,66 +127,84 @@ AutoCompltr.prototype.insertSuggestion = function(i){
    SELECT SUGGESTIONS 
    ########## */
 
-AutoCompltr.prototype.clickableSuggestion = function(className){
+AutoCompltr.prototype.clickableSuggestion = function () {
+    'use strict';
 
-    var that = this;
+    this.suggestionsFind = document.getElementsByClassName(this.CLASSNAME_AUTO_COMPLTR_SUGGESTION);
 
-    this.suggestionsFind = document.getElementsByClassName(className);
-    
-    if(typeof this.suggestionsFind !== 'undefined') {
-        var numberOfSuggestions = this.suggestionsFind.length;
+    var numberOfSuggestions = this.suggestionsFind.length,
+        i = 0;
 
-        if(numberOfSuggestions !== 0 && numberOfSuggestions !== null) {
-            for(var i = 0; i < numberOfSuggestions; i++){
-                this.suggestionsFind[i].addEventListener('click', function(e){
-                    that.HTMLInput.value = e.srcElement.innerHTML;
-                });
-            }
+    if (numberOfSuggestions) {
+        for (i; i < numberOfSuggestions; i += 1) {
+            this.onClickAtSuggestion(this.suggestionsFind[i]);
         }
     }
 };
 
-AutoCompltr.prototype.navigation = function(keycode){
+AutoCompltr.prototype.onClickAtSuggestion = function (suggestion) {
+    'use strict';
 
-    if(this.pointer >= -1 && this.pointer <= this.suggestionsFind.length - 1){
-        if(this.pointer === -1){
-            if(keycode === 40)
+    var that = this;
+
+    suggestion.addEventListener('click', function (e) {
+        that.HTMLInput.value = e.srcElement.innerHTML;
+    });
+};
+
+AutoCompltr.prototype.navigation = function (keycode) {
+    'use strict';
+
+    if (this.pointer >= -1 && this.pointer <= this.suggestionsFind.length - 1) {
+        if (this.pointer === -1) {
+            if (keycode === 40) {
                 this.chooseFocus(keycode);
-        } else if (this.pointer === this.suggestionsFind.length - 1){
-            if(keycode === 38)
+            }
+        } else if (this.pointer === this.suggestionsFind.length - 1) {
+            if (keycode === 38) {
                 this.chooseFocus(keycode);
+            }
         } else {
             this.chooseFocus(keycode);
         }
     }
 };
 
-AutoCompltr.prototype.chooseFocus = function(keycode){
+AutoCompltr.prototype.chooseFocus = function (keycode) {
+    'use strict';
 
-    if(keycode === 40){
-        if(this.pointer !== -1)
+    if (keycode === 40) {
+        if (this.pointer !== -1) {
             this.removeFocus();
-        this.pointer++;
+        }
+        this.pointer += 1;
         this.setFocus();
-    } else if(keycode === 38) {
+    } else if (keycode === 38) {
         this.removeFocus();
-        this.pointer--;
-        if(this.pointer !== -1)
+        this.pointer -= 1;
+        if (this.pointer !== -1) {
             this.setFocus();
+        }
     }
 };
 
-AutoCompltr.prototype.setFocus = function(){
+AutoCompltr.prototype.setFocus = function () {
+    'use strict';
+
     this.focused = this.suggestionsFind[this.pointer].innerHTML;
     this.suggestionsFind[this.pointer].className += ' focus';
 };
 
-AutoCompltr.prototype.removeFocus = function(){
-     this.focused = null;
-     this.suggestionsFind[this.pointer].className += 'AutoCompltr-suggestion';
+AutoCompltr.prototype.removeFocus = function () {
+    'use strict';
+
+    this.focused = null;
+    this.suggestionsFind[this.pointer].className += this.CLASSNAME_AUTO_COMPLTR_SUGGESTION;
 };
 
-AutoCompltr.prototype.setInputByFocus = function(){
+AutoCompltr.prototype.setInputByFocus = function () {
+    'use strict';
+
     this.HTMLInput.value = this.focused;
     this.removeFocus();
     this.pointer = -1;
@@ -185,25 +215,31 @@ AutoCompltr.prototype.setInputByFocus = function(){
    OTHER
    ########## */
 
-AutoCompltr.prototype.setSuggestionsList = function(datas){
-    //TODO : faire une meilleure vérification de la liste.
+AutoCompltr.prototype.setSuggestionsList = function (datas) {
+    'use strict';
 
-    if(typeof datas === 'object'){
+    if (typeof datas === 'object') {
         this.suggestionsList = datas;
     } else {
         console.error("Your list is not a good array or is empty.");
     }
 };
 
-AutoCompltr.prototype.hideSuggestionsList = function(){
+AutoCompltr.prototype.hideSuggestionsList = function () {
+    'use strict';
+
     this.HTMLSuggestionsList.style.display = 'none';
 };
 
-AutoCompltr.prototype.getValue = function(){
+AutoCompltr.prototype.getValue = function () {
+    'use strict';
+
     return this.HTMLInput.value;
 };
 
-AutoCompltr.prototype.placeholder = function(placeholder){
+AutoCompltr.prototype.placeholder = function (placeholder) {
+    'use strict';
+
     this.HTMLInput.placeholder = placeholder;
 };
 
@@ -211,16 +247,22 @@ AutoCompltr.prototype.placeholder = function(placeholder){
    ADDITIONNAL ACTION FOR EVENT
    ########## */
 
-AutoCompltr.prototype.onEnter = function(callback,once){
-    once = false || once;
-    this.onEnterEvent = function(e){
+AutoCompltr.prototype.onEnter = function (callback, once) {
+    'use strict';
+
+    once = once || false;
+    this.onEnterEvent = function (e) {
+
         this.hideSuggestionsList();
         callback(e);
-        if(once)
+        if (once) {
             this.removeOnEnter();
-    }
-}
+        }
+    };
+};
 
-AutoCompltr.prototype.removeOnEnter = function(){
+AutoCompltr.prototype.removeOnEnter = function () {
+    'use strict';
+
     this.onEnterEvent = null;
-}
+};
