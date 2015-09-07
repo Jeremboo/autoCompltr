@@ -7,7 +7,9 @@ Show the demo at : [jeremieboulay.fr/projets/LIBS/autoCompltr/demo/](http://jere
 
 ## How to install
 
-You can use bower : ``bower install auto-compltr``
+You can use bower : ``bower install --save auto-compltr``
+
+You can use npm : ``npm install --save auto-compltr``
 
 You can also use gitHub : ``git clone https://github.com/Jeremboo/autoCompltr``
 
