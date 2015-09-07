@@ -34,10 +34,12 @@
 .AutoCompltr-suggestionList{
 	position: absolute;
 	width: 98%;
-	top: 100%;
-	padding: 0;
-	margin: 0.5% 1%;
-	list-style: none;
+	max-height: 700%;
+    top: 100%;
+    padding: 0;
+    margin: 0.5% 1%;
+    list-style: none;
+    overflow-y: auto;
 }
 
 .AutoCompltr-suggestion{
