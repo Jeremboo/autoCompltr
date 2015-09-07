@@ -1,0 +1,23 @@
+{
+  "name": "AutoCompltr",
+  "version": "1.3.0",
+  "description": "An personnal library for autocompletion. It has no dependencies and works only with javascript and CSS.",
+  "main": "gulpfile.js",
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.4.0",
+    "gulp-uglifycss": "^1.0.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Jeremboo/autoCompltr.git"
+  },
+  "author": "Jérémie Boulay <jeremi.boulay@gmail.com>",
+  "license": "Apache 2.0",
+  "bugs": {
+    "url": "https://github.com/Jeremboo/autoCompltr/issues"
+  },
+  "homepage": "https://github.com/Jeremboo/autoCompltr"
+}
