@@ -52,9 +52,12 @@ AutoCompltr.prototype.init = function () {
     var that = this;
 
     this.keyboardEvent();
-    document.body.addEventListener('click', function () {
-        that.hideSuggestionsList();
+    this.HTMLInput.addEventListener('focus', function () {
+        that.testInputValue();
     });
+    this.HTMLInput.addEventListener('blur', function () {
+        this.hideSuggestionsList();
+    }.bind(this));
 };
 
 AutoCompltr.prototype.keyboardEvent = function () {
@@ -77,13 +80,17 @@ AutoCompltr.prototype.keyboardEvent = function () {
                 that.onEnterEvent(e);
             }
         } else {
-            if (that.HTMLInput.value !== "") {
-                that.displaySuggestions(false);
-            } else {
-                that.displaySuggestions(true);
-            }
+            that.testInputValue();
         }
     });
+};
+
+AutoCompltr.prototype.testInputValue = function() {
+    if (this.HTMLInput.value !== "") {
+        this.displaySuggestions(false);
+    } else {
+        this.displaySuggestions(true);
+    }
 };
 
 
@@ -147,7 +154,8 @@ AutoCompltr.prototype.onClickAtSuggestion = function (suggestion) {
 
     var that = this;
 
-    suggestion.addEventListener('click', function (e) {
+    suggestion.addEventListener('mousedown', function (e) {
+        console.log("onClickAtSuggestion");
         that.HTMLInput.value = e.srcElement.innerHTML;
     });
 };
@@ -228,6 +236,7 @@ AutoCompltr.prototype.setSuggestionsList = function (datas) {
 AutoCompltr.prototype.hideSuggestionsList = function () {
     'use strict';
 
+    console.log("hideSuggestionsList");
     this.HTMLSuggestionsList.style.display = 'none';
 };
 
